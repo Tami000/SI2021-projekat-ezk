@@ -1,0 +1,36 @@
+CREATE TABLE [dbo].[Doktori] (
+    [IdDoktora]     INT           IDENTITY (1, 1) NOT NULL,
+    [Ime]           NVARCHAR (50) NOT NULL,
+    [Prezime]       NVARCHAR (50) NOT NULL,
+    [JMBG]          NVARCHAR (50) NOT NULL,
+    [Specijalnost]  NVARCHAR (50) NOT NULL,
+    [BrojTelefona]  NVARCHAR (50) NOT NULL,
+    [KorisnickoIme] NVARCHAR (50) NOT NULL,
+    [Lozinka]       NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([IdDoktora] ASC)
+);
+
+CREATE TABLE [dbo].[Kartoni] (
+    [BrojKartona1]         INT           NOT NULL,
+    [IdDoktora1]           INT           NOT NULL,
+    [Recept]               NVARCHAR (50) NOT NULL,
+    [Bolest]               NVARCHAR (50) NULL,
+    [Alergija]             NVARCHAR (50) NULL,
+    [Simptom]              NVARCHAR (50) NOT NULL,
+    [Terapija]             NVARCHAR (50) NULL,
+    [DatumPoslednjePosete] DATETIME      NOT NULL,
+    PRIMARY KEY CLUSTERED ([BrojKartona1] ASC, [IdDoktora1] ASC),
+    FOREIGN KEY ([IdDoktora1]) REFERENCES [dbo].[Doktori] ([IdDoktora]),
+    FOREIGN KEY ([BrojKartona1]) REFERENCES [dbo].[Pacijenti] ([BrojKartona])
+);
+
+CREATE TABLE [dbo].[Pacijenti] (
+    [BrojKartona]  INT           IDENTITY (1, 1) NOT NULL,
+    [Ime]          NVARCHAR (50) NOT NULL,
+    [Prezime]      NVARCHAR (50) NOT NULL,
+    [JMBG]         NVARCHAR (50) NOT NULL,
+    [Adresa]       NVARCHAR (50) NOT NULL,
+    [BrojTelefona] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([BrojKartona] ASC)
+);
+
